@@ -47,6 +47,7 @@ public class PasswordlessLoginController : Controller
 
         return View("StartRegistration", model);
     }
+    
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CompleteRegistration(
