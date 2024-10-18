@@ -4,11 +4,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using Rsk.AspNetCore.Fido;
 using Rsk.AspNetCore.Fido.Dtos;
 using Rsk.AspNetCore.Fido.Models;
 using Velusia.Server.Data;
 using Velusia.Server.ViewModels.PasswordlessLogin;
+using Login = Velusia.Server.ViewModels.PasswordlessLogin.Login;
+using Register = Velusia.Server.ViewModels.PasswordlessLogin.Register;
 
 namespace Velusia.Server.Controllers;
 [AllowAnonymous]
@@ -42,7 +45,8 @@ public class PasswordlessLoginController : Controller
             FidoRegistrationChallenge challenge = await _fido.InitiateRegistration(model.Username, model.DeviceName);
 
             // challenge the device
-            return View(challenge.ToBase64Dto());
+            var register = new Register { Challenge = challenge.ToBase64Dto() };
+            return View(register);
         }
 
         return View("StartRegistration", model);
@@ -89,7 +93,7 @@ public class PasswordlessLoginController : Controller
             FidoAuthenticationChallenge challenge = await _fido.InitiateAuthentication(model.Username);
             Login loginModel = new()
             {
-                Base64Challenge = challenge.ToBase64Dto(),
+                Challenge = challenge.ToBase64Dto(),
                 RelyingPartyId = challenge.RelyingPartyId,
                 ReturnUrl = model.ReturnUrl
             };
