@@ -31,7 +31,7 @@ public class PasswordlessLoginController : Controller
     [ValidateAntiForgeryToken]
     public async Task<ActionResult> Register(StartRegistration model)
     {
-        if (ModelState.IsValid)
+            if (ModelState.IsValid)
         {
             if (await _userManager.FindByEmailAsync(model.Username) != null)
             {
@@ -42,11 +42,13 @@ public class PasswordlessLoginController : Controller
             FidoRegistrationChallenge challenge = await _fido.InitiateRegistration(model.Username, model.DeviceName);
 
             // challenge the device
-            return View(challenge.ToBase64Dto());
+            var register = new Register { Challenge = challenge.ToBase64Dto() };
+            return View(register);
         }
 
         return View("StartRegistration", model);
     }
+    
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CompleteRegistration(
