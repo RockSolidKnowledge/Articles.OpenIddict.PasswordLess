@@ -17,7 +17,7 @@
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.8.0" />
     <PackageReference Include="OpenIddict.Quartz" Version="5.8.0" />
     <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
-    <PackageReference Include="Rsk.AspNetCore.Fido" Version="3.0.0" />
+    <PackageReference Include="Rsk.AspNetCore.Fido" Version="4.0.1" />
   </ItemGroup>
 
 </Project>
