@@ -128,7 +128,7 @@
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(encodedCredentials),
-                beforeSend: function (xhr) { xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val()); },
+                beforeSend: function (xhr) { xhr.setRequestHeader("RequestVerificationToken", $('input:hidden[name="__RequestVerificationToken"]').val()); },
 
                 success: function () {
                     window.location.href = "/";
