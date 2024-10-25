@@ -1,0 +1,17 @@
+﻿@model Velusia.Server.ViewModels.PasswordlessLogin.StartLogin
+@{
+    ViewData["Title"] = "Passwordless Login";
+}
+
+<h2>Login</h2>
+
+
+If you don't have an account, please @Html.ActionLink("register", "StartRegistration", "PasswordlessLogin", new Dictionary<string, object>() { { "returnUrl", Model.ReturnUrl } }).
+<form asp-action="StartLogin">
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" required />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
