@@ -80,12 +80,14 @@ public class PasswordlessLoginController : Controller
 
         return BadRequest(String.Join(',', userCreationResult.Errors.Select(e => e.Description)));
     }
+
     public async Task<ActionResult> StartLogin(string? returnUrl =null)
     {
         StartLogin model = new()
         {
             ReturnUrl = returnUrl
         };
+        
         return View(model);
     }
 
@@ -129,8 +131,7 @@ public class PasswordlessLoginController : Controller
             return BadRequest("No user exists with that email address.");
         }
 
-        _signInManager.SignInAsync(user, false);
-
+        await         _signInManager.SignInAsync(user, false);
 
         return new EmptyResult();
     }
