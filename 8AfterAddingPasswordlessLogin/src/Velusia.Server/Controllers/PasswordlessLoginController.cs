@@ -81,7 +81,7 @@ public class PasswordlessLoginController : Controller
         return BadRequest(String.Join(',', userCreationResult.Errors.Select(e => e.Description)));
     }
 
-    public async Task<ActionResult> StartLogin(string? returnUrl =null)
+    public ActionResult StartLogin(string? returnUrl =null)
     {
         StartLogin model = new()
         {
